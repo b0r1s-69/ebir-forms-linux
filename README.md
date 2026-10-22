@@ -72,27 +72,37 @@ QtWebEngine window (Chromium)                     Python host (same process tree
 ## 4. Run it
 
 ```sh
-# 1. recover the asset tree from the official installer (once)
-python3 tools/extract_assets.py            # picks up the .zip/.exe in this folder
+# one command: checks dependencies, recovers the assets, installs the menu entry
+./install.sh
 
-# 2. start the app
-./run.sh
+# ...or step by step
+python3 tools/extract_assets.py            # once: recover from the installer in this folder
+./run.sh                                   # start the app
 ```
 
-`tools/extract_assets.py` accepts an explicit installer path
-(`python3 tools/extract_assets.py ~/Downloads/Offline_eBIRForms_Package_v7.9.6.1_setup.zip`)
-and writes `assets/app` plus `assets/recovered.json` (provenance: resource ids,
-sizes, files overlaid from the installer).
+`install.sh` is idempotent and takes an optional installer path
+(`./install.sh ~/Downloads/Offline_eBIRForms_Package_v7.9.6.1_setup.zip`).
+`tools/extract_assets.py` writes `assets/app` plus `assets/recovered.json`
+(provenance: resource ids, sizes, files overlaid from the installer).
 
-### Install as a desktop application
+### Installing from the git repository
 
 ```sh
-mkdir -p ~/.local/share/applications ~/.local/share/icons/hicolor/256x256/apps
-cp packaging/ebirforms-native.png ~/.local/share/icons/hicolor/256x256/apps/
-sed "s#/home/admin/Desktop/Workspace/ebirforms#$PWD#" packaging/ebirforms-native.desktop \
-    > ~/.local/share/applications/ebirforms-native.desktop
-update-desktop-database ~/.local/share/applications 2>/dev/null || true
+gh repo clone b0r1s-69/ebir-forms-linux          # private repo: uses your gh login
+cd ebir-forms-linux
+python3 -m pip install PySide6 pefile            # runtime + one-off extraction dep
+sudo dnf install innoextract                     # or: sudo apt install innoextract
+./install.sh /path/to/ebirforms_package_installer_v7.9.6.1.exe
 ```
+
+### Desktop integration
+
+`install.sh` writes `ebirforms-native.desktop` + the icon into
+`$XDG_DATA_HOME/applications` and `.../icons/hicolor/256x256/apps`, so
+"Offline eBIRForms" appears in the application menu. If that directory is not
+writable — e.g. a read-only home mount, or a sandboxed session — the installer
+skips it and prints the launch command; you can then make your own shortcut
+(panel launcher, KDE "Add to Panel", terminal alias) pointing at `./run.sh`.
 
 ### Where your data lives
 
