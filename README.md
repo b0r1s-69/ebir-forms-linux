@@ -164,7 +164,9 @@ packaging/                  .desktop entry + icon
 ## 8. Reproducing the verification
 
 The entry point doubles as a headless harness (offscreen Chromium, screenshots,
-PDF, console dump):
+PDF, console dump). `make test` runs the whole static + functional check suite
+(shell syntax, Python compile, injected JS parse, desktop-entry validation, and
+both `install.sh` branches — menu-entry install and the read-only fallback):
 
 ```sh
 # shell render
