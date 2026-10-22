@@ -85,6 +85,23 @@ python3 tools/extract_assets.py            # once: recover from the installer in
 `tools/extract_assets.py` writes `assets/app` plus `assets/recovered.json`
 (provenance: resource ids, sizes, files overlaid from the installer).
 
+### Installing from a release
+
+The [releases page](https://github.com/b0r1s-69/ebir-forms-linux/releases) ships
+two assets, both self-contained tarballs:
+
+| Asset | Contents |
+| --- | --- |
+| `ebir-forms-linux-<ver>-bundle.tar.gz` | port **+ recovered BIR form assets** — ready to run, no installer needed |
+| `ebir-forms-linux-<ver>-src.tar.gz` | port source only, no BIR content — supply the official installer |
+
+```sh
+tar -xzf ebir-forms-linux-1.0.0-bundle.tar.gz
+cd ebir-forms-linux-1.0.0
+python3 -m pip install PySide6
+./install.sh && ./run.sh
+```
+
 ### Installing from the git repository
 
 ```sh
