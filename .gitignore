@@ -1,0 +1,15 @@
+# Recovered from the official installer by tools/extract_assets.py
+assets/app/
+assets/recovered.json
+
+# The BIR installer itself is proprietary and stays local; the extractor reads
+# it from wherever you keep it (this folder, or an explicit path argument).
+ebirforms_package_installer_*.exe
+Offline_eBIRForms_Package_*.zip
+
+# Runtime data (seeded application tree, profiles, saved returns, logs)
+.data/
+
+# Python
+__pycache__/
+*.pyc

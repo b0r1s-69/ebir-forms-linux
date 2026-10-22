@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Version=1.5
+Name=Offline eBIRForms
+Name[en]=Offline eBIRForms
+GenericName=BIR Tax Forms
+Comment=File Philippine BIR tax returns offline (native Linux port)
+Comment[en]=File Philippine BIR tax returns offline (native Linux port)
+Exec=/home/admin/Desktop/Workspace/ebirforms/run.sh
+Path=/home/admin/Desktop/Workspace/ebirforms
+Icon=/home/admin/Desktop/Workspace/ebirforms/packaging/ebirforms-native.png
+Terminal=false
+Categories=Office;Finance;
+Keywords=BIR;eBIRForms;tax;return;BIRForms;
+StartupNotify=true
+StartupWMClass=eBIRForms
